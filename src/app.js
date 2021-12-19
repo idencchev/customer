@@ -18,7 +18,7 @@ document.getElementById('logout').addEventListener('click', onLogout);
 
 
 page(decorateContext);
-page('/customer/create', loginPage);
+page('/customer/login', loginPage);
 page('/customer/register', registerPage);
 page('/customer/create', createPage);
 page('/customer/search', searchPage);
