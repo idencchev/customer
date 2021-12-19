@@ -47,7 +47,7 @@ async function onLogin(e) {
         }
         await login(form.get('username'), form.get('password'));
 
-        page.redirect('/');
+        page.redirect('/customer');
         updateUserNav();
     } catch (err) {
         //  alert(error);
