@@ -83,7 +83,7 @@ export function createPage(ctx) {
             await create(data);
             updateUserNav();
             e.target.reset();
-            ctx.page.redirect('/search');
+            ctx.page.redirect('/customer/search');
         } catch (err) {
             alert(err.message);
         }
