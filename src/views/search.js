@@ -87,7 +87,7 @@ export async function searchPage(ctx) {
 async function onSearch() {
     const search = document.getElementById('search-input').value
     if (search) {
-        page.redirect(`/search?query=${encodeURIComponent(search)}`)
+        page.redirect(`/customer/search?query=${encodeURIComponent(search)}`)
     }
 
 }
