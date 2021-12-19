@@ -1,0 +1,39 @@
+.create {
+    width: 52%;
+    position: relative;
+    left: 12%;
+}
+
+body>main>h2 {
+    margin-top: 40px;
+}
+
+.no-arrow {
+    -moz-appearance: textfield;
+}
+
+.no-arrow::-webkit-inner-spin-button {
+    display: none;
+}
+
+.no-arrow::-webkit-outer-spin-button,
+.no-arrow::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-section1{
+    width: 143%;
+    display: inline-flex;
+    position: relative;
+    width: 150%;
+}
+
+.input-section2{
+    width: 143%;
+    display: inline-flex;
+}
+
+body > main > form > section.input-section2 > div:nth-child(1){
+    width: 53%;
+}
