@@ -51,5 +51,5 @@ export function updateUserNav() {
 async function onLogout() {
     await logout();
      updateUserNav();
-    page.redirect('/login');
+    page.redirect('/customer/login');
 }
