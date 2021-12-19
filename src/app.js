@@ -18,10 +18,10 @@ document.getElementById('logout').addEventListener('click', onLogout);
 
 
 page(decorateContext);
-page('/login', loginPage);
-page('/register', registerPage);
-page('/create', createPage);
-page('/search', searchPage);
+page('/customer/create', loginPage);
+page('/customer/register', registerPage);
+page('/customer/create', createPage);
+page('/customer/search', searchPage);
 updateUserNav();
 page.start();
 
