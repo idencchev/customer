@@ -31,7 +31,7 @@ function decorateContext(ctx, next) {
 export function updateUserNav() {
     const userData = getUserData();
     let path = localStorage.getItem('path');
-    
+    localStorage.path = 'login';
     
     if (userData) {
         localStorage.path = 'search';
