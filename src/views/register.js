@@ -67,7 +67,7 @@ export function registerPage(ctx) {
             }
 
             await register(username, email, password);
-            ctx.page.redirect('/customer');
+            ctx.page.redirect('/');
             updateUserNav();
         } catch (err) {
             alert(err.message);
