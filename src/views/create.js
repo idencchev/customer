@@ -5,9 +5,6 @@ import { html, page } from '../lib.js';
 
 const createTemplate = (onCreate) => html`
     <h2 class="text-uppercase text-center mb-5">Add vehicle to the garrage database</h2>
-    
-    
-    
     <form @submit=${onCreate} class="create">
         <section class="input-section1">
             <div class="form-outline mb-4">
@@ -83,7 +80,7 @@ export function createPage(ctx) {
             await create(data);
             updateUserNav();
             e.target.reset();
-            ctx.page.redirect('/customer/search');
+            ctx.page.redirect('/search');
         } catch (err) {
             alert(err.message);
         }
