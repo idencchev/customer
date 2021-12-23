@@ -31,6 +31,8 @@ function decorateContext(ctx, next) {
 export function updateUserNav() {
     const userData = getUserData();
     let path = localStorage.getItem('path');
+    localStorage.path = 'login';
+    
     if (userData) {
         document.getElementById('mainLink').href = `/search`;
         document.getElementById('welcomeMsg').textContent = `Welcome, ${userData.username}`;
@@ -46,7 +48,7 @@ export function updateUserNav() {
     }
 }
 
-   // localStorage.removeItem('path'); 
+   localStorage.removeItem('path'); 
    
 async function onLogout() {
     await logout();
