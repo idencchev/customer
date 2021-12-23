@@ -17,6 +17,11 @@ page('/register', registerPage);
 page('/create', createPage);
 page('/search', searchPage);
 updateUserNav();
+
+let path = localStorage.getItem('path');
+page.redirect(`/${path}`);
+
+
 page.start();
 
 
