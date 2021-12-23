@@ -46,7 +46,7 @@ export function updateUserNav() {
     }
 }
 
-    localStorage.removeItem('path'); 
+   // localStorage.removeItem('path'); 
    
 async function onLogout() {
     await logout();
