@@ -1,11 +1,5 @@
 <script>
-    let path = window.location.pathname.slice(1);
-    
-    if(path == null && localStorage('userData')){
-        path = 'search';
-    } else if(path == null && !localStorage('userData')){
-        path = 'login';
-    }
+    const path = window.location.pathname.slice(1);
     localStorage.setItem('path', path);
     window.location.href='../';
 </script>
