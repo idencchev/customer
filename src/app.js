@@ -8,7 +8,6 @@ import { createPage } from "./views/create.js";
 import { searchPage } from "./views/search.js";
 
  let path = localStorage.getItem('path');
- localStorage.path = 'login';
 
 const root = document.querySelector("main");
 
@@ -35,14 +34,12 @@ export function updateUserNav() {
     const userData = getUserData();
     
     if (userData) {
-        localStorage.path = 'search';
         document.getElementById('mainLink').href = `/search`;
         document.getElementById('welcomeMsg').textContent = `Welcome, ${userData.username}`;
         document.querySelectorAll('.user').forEach(user => user.style.display = '');
         document.querySelectorAll('.guest').forEach(guest => guest.style.display = 'none');
         page.redirect(`/${path}`);
     } else {
-        localStorage.path = 'login';
         document.getElementById('mainLink').href = `/login`;
         document.getElementById('welcomeMsg').textContent = 'Welcome, Guest'
         document.querySelectorAll('.user').forEach(user => user.style.display = 'none');
