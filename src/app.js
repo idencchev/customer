@@ -40,12 +40,13 @@ export function updateUserNav() {
         document.querySelectorAll('.user').forEach(user => user.style.display = 'none');
         document.querySelectorAll('.guest').forEach(guest => guest.style.display = '');
     }
+   let path = localStorage.getItem('path');
+   page.redirect(`/${path}`);
+   localStorage.removeItem('path'); 
 
 }
 
-let path = localStorage.getItem('path');
-page.redirect(`/${path}`);
-localStorage.removeItem('path');
+
 
 async function onLogout() {
     await logout();
