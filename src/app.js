@@ -17,11 +17,6 @@ page('/register', registerPage);
 page('/create', createPage);
 page('/search', searchPage);
 updateUserNav();
-
-let path = localStorage.getItem('path');
-page.redirect(`/${path}`);
-
-
 page.start();
 
 
@@ -46,6 +41,8 @@ export function updateUserNav() {
 
 }
 
+let path = localStorage.getItem('path');
+page.redirect(`/${path}`);
 
 async function onLogout() {
     await logout();
