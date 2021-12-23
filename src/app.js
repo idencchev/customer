@@ -12,6 +12,7 @@ const root = document.querySelector("main");
 document.getElementById('logout').addEventListener('click', onLogout);
 
 page(decorateContext);
+page('/', loginPage);
 page('/login', loginPage);
 page('/register', registerPage);
 page('/create', createPage);
@@ -40,12 +41,11 @@ export function updateUserNav() {
         document.querySelectorAll('.user').forEach(user => user.style.display = 'none');
         document.querySelectorAll('.guest').forEach(guest => guest.style.display = '');
     }
+}
+
    let path = localStorage.getItem('path');
    page.redirect(`/${path}`);
    localStorage.removeItem('path'); 
-
-}
-
 
 
 async function onLogout() {
