@@ -26,11 +26,11 @@ function decorateContext(ctx, next) {
     next();
 }
 
-let path = localStorage.getItem('path');
+
 
 export function updateUserNav() {
     const userData = getUserData();
-
+    let path = localStorage.getItem('path');
     if (userData) {
         document.getElementById('mainLink').href = `/search`;
         document.getElementById('welcomeMsg').textContent = `Welcome, ${userData.username}`;
