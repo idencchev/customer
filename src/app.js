@@ -12,7 +12,6 @@ const root = document.querySelector("main");
 document.getElementById('logout').addEventListener('click', onLogout);
 
 page(decorateContext);
-page('/', loginPage);
 page('/login', loginPage);
 page('/register', registerPage);
 page('/create', createPage);
@@ -27,6 +26,8 @@ function decorateContext(ctx, next) {
     next();
 }
 
+let path = localStorage.getItem('path');
+
 export function updateUserNav() {
     const userData = getUserData();
 
@@ -35,19 +36,18 @@ export function updateUserNav() {
         document.getElementById('welcomeMsg').textContent = `Welcome, ${userData.username}`;
         document.querySelectorAll('.user').forEach(user => user.style.display = '');
         document.querySelectorAll('.guest').forEach(guest => guest.style.display = 'none');
+        page.redirect(`/${path}`);
     } else {
         document.getElementById('mainLink').href = `/login`;
         document.getElementById('welcomeMsg').textContent = 'Welcome, Guest'
         document.querySelectorAll('.user').forEach(user => user.style.display = 'none');
         document.querySelectorAll('.guest').forEach(guest => guest.style.display = '');
+        page.redirect(`/${path}`);
     }
 }
 
-   let path = localStorage.getItem('path');
-   page.redirect(`/${path}`);
-   localStorage.removeItem('path'); 
-
-
+    localStorage.removeItem('path'); 
+   
 async function onLogout() {
     await logout();
      updateUserNav();
