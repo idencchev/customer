@@ -1,7 +1,4 @@
 import { loginPage } from "./views/login.js";
-//import { page, render } from './lib.js';
-
-
 import {page} from "./lib.js";
 import { html, render } from "./lib.js";
 import { registerPage } from "./views/register.js";
@@ -14,14 +11,11 @@ const root = document.querySelector("main");
 
 document.getElementById('logout').addEventListener('click', onLogout);
 
-
-
-
 page(decorateContext);
-page('/customer/login', loginPage);
-page('/customer/register', registerPage);
-page('/customer/create', createPage);
-page('/customer/search', searchPage);
+page('/login', loginPage);
+page('/register', registerPage);
+page('/create', createPage);
+page('/search', searchPage);
 updateUserNav();
 page.start();
 
@@ -51,5 +45,5 @@ export function updateUserNav() {
 async function onLogout() {
     await logout();
      updateUserNav();
-    page.redirect('/customer/login');
+    page.redirect('/login');
 }
