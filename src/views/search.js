@@ -80,7 +80,7 @@ const searchCart = (data) => html`
 export async function searchPage(ctx) {
     const params = ctx.querystring.split('&')[1];
     let data = { results: [] };
-console.log(params)
+    
     if (params != undefined) {
         var [type, param] = params.split('=');
         data = await searchCar(type, param);
