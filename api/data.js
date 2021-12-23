@@ -4,8 +4,8 @@ export const login = api.login;
 export const register = api.register;
 export const logout = api.logout;
 
-export async function searchCar(query){
-    return api.get(`/classes/carDB?where={"RegNumber":"${query}"}`);
+export async function searchCar(type, query){
+    return api.get(`/classes/carDB?where={"${type}":"${query}"}`);
 }
 
 export async function create(data) {
