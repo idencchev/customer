@@ -67,13 +67,13 @@ const searchCart = (data) => html`
         </div>
     </section>
     <div class="form-outline mb-4">
-            <label class="form-label" for="form3Example4cg">Mechanic Name</label>
-            <input type="text" id="form3Example4cg" name="mechanic" class="form-control form-control-lg"
-                placeholder="Example: Viktor" />
-            <label class="form-label" for="form3Example4cg">Date</label>
-            <input type="calendar" id="form3Example4cg" name="date" class="form-control form-control-lg"
-                placeholder="Example: 12.12.2021" />
-        </div>
+        <label class="form-label" for="form3Example4cg">Mechanic Name</label>
+        <input type="text" id="form3Example4cg" name="mechanic" class="form-control form-control-lg"
+            placeholder="Example: Viktor" .value=${data.mechanic}/>
+        <label class="form-label" for="form3Example4cg">Date</label>
+        <input type="calendar" id="form3Example4cg" name="date" class="form-control form-control-lg"
+            placeholder="Example: 12.12.2021" .value=${data.date}/>
+    </div>
 </form>`;
 
 export async function searchPage(ctx) {
