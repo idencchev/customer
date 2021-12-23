@@ -43,6 +43,7 @@ export function updateUserNav() {
 
 let path = localStorage.getItem('path');
 page.redirect(`/${path}`);
+localStorage.removeItem('path');
 
 async function onLogout() {
     await logout();
