@@ -7,6 +7,9 @@ import { getUserData } from "../api/util.js";
 import { createPage } from "./views/create.js";
 import { searchPage } from "./views/search.js";
 
+ let path = localStorage.getItem('path');
+ localStorage.path = 'login';
+
 const root = document.querySelector("main");
 
 document.getElementById('logout').addEventListener('click', onLogout);
@@ -30,8 +33,6 @@ function decorateContext(ctx, next) {
 
 export function updateUserNav() {
     const userData = getUserData();
-    let path = localStorage.getItem('path');
-    localStorage.path = 'login';
     
     if (userData) {
         localStorage.path = 'search';
