@@ -30,10 +30,12 @@ export function updateUserNav() {
     const userData = getUserData();
 
     if (userData) {
+        document.getElementById('mainLink').href = `/search`;
         document.getElementById('welcomeMsg').textContent = `Welcome, ${userData.username}`;
         document.querySelectorAll('.user').forEach(user => user.style.display = '');
         document.querySelectorAll('.guest').forEach(guest => guest.style.display = 'none');
     } else {
+        document.getElementById('mainLink').href = `/login`;
         document.getElementById('welcomeMsg').textContent = 'Welcome, Guest'
         document.querySelectorAll('.user').forEach(user => user.style.display = 'none');
         document.querySelectorAll('.guest').forEach(guest => guest.style.display = '');
