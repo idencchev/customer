@@ -27,6 +27,12 @@ function decorateContext(ctx, next) {
     next();
 }
 
+let path = localStorage.getItem('path');
+    if(path) {
+       page.redirect(path);
+       localStorage.removeItem('path');
+    }
+
 export function updateUserNav() {
     const userData = getUserData();
 
