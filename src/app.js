@@ -27,11 +27,6 @@ function decorateContext(ctx, next) {
     next();
 }
 
-let path = localStorage.getItem('path');
-       page.redirect(path);
-       localStorage.removeItem('path');
-    
-
 export function updateUserNav() {
     const userData = getUserData();
 
@@ -46,6 +41,12 @@ export function updateUserNav() {
 
 }
 
+let path = localStorage.getItem('path');
+    if(path) {
+       localStorage.removeItem('path');
+       page.redirect(path);
+       
+    }
 
 async function onLogout() {
     await logout();
