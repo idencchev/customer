@@ -14,9 +14,9 @@ const root = document.querySelector("main");
 document.getElementById('logout').addEventListener('click', onLogout);
 
 let path = localStorage.getItem('path');
-if (path) {
+if (path && performance.navigation.type == performance.navigation.TYPE_RELOAD) {
     page.redirect(path);
-
+    localStorage.removeItem('path'); 
 }
 
 page(decorateContext);
