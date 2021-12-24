@@ -11,6 +11,8 @@ const root = document.querySelector("main");
 
 document.getElementById('logout').addEventListener('click', onLogout);
 
+localStorage.removeItem('path');
+
 page(decorateContext);
 page('/', homePage);
 page('/login', loginPage);
@@ -45,7 +47,7 @@ let path = localStorage.getItem('path');
     if(path) {
       page.redirect(path);  
     }
-localStorage.removeItem('path');
+
 
 async function onLogout() {
     await logout();
