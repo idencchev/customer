@@ -45,7 +45,7 @@ let path = localStorage.getItem('path');
     if(path) {
        localStorage.removeItem('path');
        page.redirect(path); 
-        localStorage.removeItem('path');
+       return;
     }
 
 async function onLogout() {
