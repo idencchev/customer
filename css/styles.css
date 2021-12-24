@@ -12129,3 +12129,17 @@ textarea.form-control-lg {
 .list-group-item-test{
   text-align: left;
 }
+
+.remove {
+  background-color: red;
+  color: white;
+  border: 2px solid red;
+  border-radius: 4px;
+}
+
+.editCar {
+  background-color: #28a745;
+  color: white;
+  border: 2px solid #28a745;
+  border-radius: 4px;
+}
