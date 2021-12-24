@@ -15,9 +15,9 @@ const root = document.querySelector("main");
 document.getElementById('logout').addEventListener('click', onLogout);
 
 let path = localStorage.getItem('path');
-page.redirect(path);
+
 if (path) {
-    
+ page.redirect(`/${path}`);   
     localStorage.removeItem('path'); 
 }
 
