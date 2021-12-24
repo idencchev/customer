@@ -7,11 +7,17 @@ import { createPage } from "./views/create.js";
 import { searchPage } from "./views/search.js";
 import { homePage } from "./views/home.js";
 
+localStorage.removeItem('path');
+
 const root = document.querySelector("main");
 
 document.getElementById('logout').addEventListener('click', onLogout);
 
-localStorage.removeItem('path');
+let path = localStorage.getItem('path');
+if (path) {
+    page.redirect(path);
+
+}
 
 page(decorateContext);
 page('/', homePage);
@@ -42,12 +48,6 @@ export function updateUserNav() {
     }
 
 }
-
-let path = localStorage.getItem('path');
-    if(path) {
-      page.redirect(path);  
-    }
-
 
 async function onLogout() {
     await logout();
