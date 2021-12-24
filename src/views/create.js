@@ -77,7 +77,7 @@ export function createPage(ctx) {
         try {
             const userData = getUserData();
             const data = form.reduce((acc, [key, value]) => Object.assign(acc, { [key]: value.trim() }), {});
-            data.RegNumber = userData.RegNumber.toUpperCase();
+            data.RegNumber = userData.RegNumber.toLowerCase();
             data.date = data.date.split('-').reverse().join('.');
             data.addedBy = userData.username;
             data.userId = userData.userId;
