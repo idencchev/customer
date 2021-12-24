@@ -44,7 +44,7 @@ export function updateUserNav() {
 let path = localStorage.getItem('path');
     if(path) {
        
-       page.redirect(path); 
+      // page.redirect(path); 
       localStorage.removeItem('path');
     }
 
