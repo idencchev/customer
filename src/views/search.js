@@ -1,4 +1,4 @@
-import { searchCar } from '../../api/data.js';
+import { deleteCar, searchCar } from '../../api/data.js';
 import { html, page } from '../lib.js';
 
 const searchTemplate = (onSearch, data, param = '') => html`
@@ -16,12 +16,11 @@ const searchTemplate = (onSearch, data, param = '') => html`
             ${data.results.length ? data.results.map(searchCart) : html`<p class="no-result">No result.</p>`}
     
         </div>
-    
     </div>`;
 
 const searchCart = (data) => html`
 <ul class="list-items-database">
-    <li class="list-group-item-test">Register Number: ${data.RegNumber.toUpperCase()}</li>
+    <li class="list-group-item-test">Register Number: ${data.RegNumber}</li>
     <li class="list-group-item-test">Make: ${data.make}</li>
     <li class="list-group-item-test">Model: ${data.model}</li>
     <li class="list-group-item-test">Year: ${data.year}</li>
@@ -31,7 +30,12 @@ const searchCart = (data) => html`
     <li class="list-group-item-test">Parts Prices and Providers: ${data.prices}</li>
     <li class="list-group-item-test">Mechanic Name: ${data.mechanic}</li>
     <li class="list-group-item-test">Date: ${data.date}</li>
-</ul>`;
+    <li class="list-group-item-test">Added By: ${data.addedBy}</li>
+    <a class="list-group-item-test editCar" href="/edit/${data.objectId}" class="edit">Edit</a>
+    <a class="list-group-item-test remove" id=${data.objectId} href="javascript:void(0)">Delete</a>
+</ul>
+`;
+
 
 export async function searchPage(ctx) {
     const params = ctx.querystring.split('&')[1];
@@ -41,7 +45,9 @@ export async function searchPage(ctx) {
         var [type, param] = params.split('=');
         data = await searchCar(type, param);
     }
-    ctx.render(searchTemplate(onSearch, data, param));
+    ctx.render(searchTemplate(onSearch, data, param, onDelete));
+
+    [...document.getElementsByClassName('remove')].forEach(el => el.addEventListener('click', onDelete));
 }
 
 async function onSearch() {
@@ -50,5 +56,14 @@ async function onSearch() {
 
     if (search) {
         page.redirect(`/search?query=type=${encodeURIComponent(`${select}&${select}=${search}`)}`);
+    }
+}
+
+
+async function onDelete(e) {
+    const check = confirm('Are you sure want to delete this car?');
+    if (check) {
+        await deleteCar(e.target.id);
+        page.redirect(`/search?${window.location.href.split('?')[1]}`);
     }
 }
