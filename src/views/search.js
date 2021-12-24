@@ -51,7 +51,7 @@ export async function searchPage(ctx) {
 }
 
 async function onSearch() {
-    const search = document.getElementById('search-input').value.trim();
+    const search = document.getElementById('search-input').value.trim().toUpperCase();
     const select = document.querySelector('select').value;
 
     if (search) {
