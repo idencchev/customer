@@ -6,8 +6,7 @@ import { getUserData } from "../api/util.js";
 import { createPage } from "./views/create.js";
 import { searchPage } from "./views/search.js";
 import { homePage } from "./views/home.js";
-
-
+import { editPage } from "./views/edit.js";
 
 
 const root = document.querySelector("main");
@@ -27,6 +26,7 @@ page('/login', loginPage);
 page('/register', registerPage);
 page('/create', createPage);
 page('/search', searchPage);
+page('/edit/:id', editPage);
 updateUserNav();
 page.start();
 
