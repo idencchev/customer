@@ -7,15 +7,17 @@ import { createPage } from "./views/create.js";
 import { searchPage } from "./views/search.js";
 import { homePage } from "./views/home.js";
 
-localStorage.removeItem('path');
+
+
 
 const root = document.querySelector("main");
 
 document.getElementById('logout').addEventListener('click', onLogout);
 
 let path = localStorage.getItem('path');
-if (path && performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-    page.redirect(path);
+page.redirect(path);
+if (path) {
+    
     localStorage.removeItem('path'); 
 }
 
