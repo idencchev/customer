@@ -1,7 +1,8 @@
-import { deleteCar, searchCar } from '../../api/data.js';
+import { deleteCar, paginateSearch } from '../../api/data.js';
+import { parseQuery } from '../../api/util.js';
 import { html, page } from '../lib.js';
 
-const searchTemplate = (onSearch, data, param = '') => html`
+const searchTemplate = (onSearch, data, param = '', queryStr, skip) => html`
     <div class="content">
     
         <input id="search-input" type="text" name="search" placeholder="CU57ABC or 12.12.2021" .value=${param}>
@@ -15,6 +16,10 @@ const searchTemplate = (onSearch, data, param = '') => html`
         <div class="search-result">
             ${data.results.length ? data.results.map(searchCart) : html`<p class="no-result">No result.</p>`}
     
+        </div>
+        <div class="space-top">
+            ${skip > 1 ? html`<a class="page-index btn btn-info" href="?${queryStr}${skip - 1}">&lt; Prev</a>` : null}
+            ${skip < data.count ? html`<a class="page-index btn btn-info" href="?${queryStr}${skip + 1}">Next &gt;</a>` : null}
         </div>
     </div>`;
 
@@ -31,21 +36,22 @@ const searchCart = (data) => html`
     <li class="list-group-item-test">Mechanic Name: ${data.mechanic}</li>
     <li class="list-group-item-test">Date: ${data.date}</li>
     <li class="list-group-item-test">Added By: ${data.addedBy}</li>
-    <a class="list-group-item-test editCar" href="/edit/${data.objectId}" class="edit">Edit</a>
+    <a class="list-group-item-test editCar" href="/edit/${data.objectId}">Edit</a>
     <a class="list-group-item-test remove" id=${data.objectId} href="javascript:void(0)">Delete</a>
-</ul>
-`;
-
+</ul>`;
 
 export async function searchPage(ctx) {
-    const params = ctx.querystring.split('&')[1];
     let data = { results: [] };
+    
+    const params = Object.entries(parseQuery(ctx.querystring)).splice(1, 2);
 
-    if (params != undefined) {
-        var [type, param] = params.split('=');
-        data = await searchCar(type, param);
+    if (params.length) {
+        var [type, param] = params[0];
+        var skip = Number(params[1][1]) || 1;
+        var queryStr = encodeURIComponent(ctx.querystring.substring(0, ctx.querystring.length - 1));
+        data = await paginateSearch(type, param, skip);
     }
-    ctx.render(searchTemplate(onSearch, data, param, onDelete));
+    ctx.render(searchTemplate(onSearch, data, param, queryStr, skip));
 
     [...document.getElementsByClassName('remove')].forEach(el => el.addEventListener('click', onDelete));
 }
@@ -55,10 +61,9 @@ async function onSearch() {
     const select = document.querySelector('select').value;
 
     if (search) {
-        page.redirect(`/search?query=type=${encodeURIComponent(`${select}&${select}=${search}`)}`);
+        page.redirect(`/search?query=type=${encodeURIComponent(`${select}&${select}=${search}&page= `)}`);
     }
 }
-
 
 async function onDelete(e) {
     const check = confirm('Are you sure want to delete this car?');
