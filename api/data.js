@@ -23,3 +23,7 @@ export async function editCar(id, data) {
 export async function getCar(id) {
     return await api.get(`/classes/carDB/${id}`);
 }
+
+export async function paginateSearch(type, param, skip) {
+    return await api.get(`/classes/carDB?where={"${type}":"${param}"}&skip=${skip - 1}&limit=1&count=1`);
+}
