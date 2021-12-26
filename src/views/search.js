@@ -4,9 +4,12 @@ import { html, page } from '../lib.js';
 
 const searchTemplate = (onSearch, data, param = '', queryStr, skip) => html`
     <div class="content">
-    
         <input id="search-input" type="text" name="search" placeholder="CU57ABC or 12.12.2021" .value=${param}>
-        <select>
+        <br>
+        Register Number <input type="checkbox" id="regNumber" value="RegNumber">
+        Date <input type="checkbox" id="date" value="date">
+        <br>
+        <select style="display:none">
             <option value="RegNumber">Register Number</option>
             <option value="date">Date</option>
         </select>
@@ -19,7 +22,8 @@ const searchTemplate = (onSearch, data, param = '', queryStr, skip) => html`
         </div>
         <div class="space-top">
             ${skip > 1 ? html`<a class="page-index btn btn-info" href="?${queryStr}${skip - 1}">&lt; Prev</a>` : null}
-            ${skip < data.count ? html`<a class="page-index btn btn-info" href="?${queryStr}${skip + 1}">Next &gt;</a>` : null}
+            ${skip < data.count ? html`<a class="page-index btn btn-info" href="?${queryStr}${skip + 1}">Next &gt;</a>` :
+                null}
         </div>
     </div>`;
 
@@ -42,7 +46,6 @@ const searchCart = (data) => html`
 
 export async function searchPage(ctx) {
     let data = { results: [] };
-    
     const params = Object.entries(parseQuery(ctx.querystring)).splice(1, 2);
 
     if (params.length) {
@@ -52,16 +55,24 @@ export async function searchPage(ctx) {
         data = await paginateSearch(type, param, skip);
     }
     ctx.render(searchTemplate(onSearch, data, param, queryStr, skip));
-
     [...document.getElementsByClassName('remove')].forEach(el => el.addEventListener('click', onDelete));
 }
 
 async function onSearch() {
     const search = document.getElementById('search-input').value.trim();
-    const select = document.querySelector('select').value;
+    const regNumberCheckBox = document.getElementById('regNumber');
+    const dateCheckBox = document.getElementById('date');
 
     if (search) {
-        page.redirect(`/search?query=type=${encodeURIComponent(`${select}&${select}=${search}&page= `)}`);
+        const query = {
+            querystring: (checkBox) => `/search?query=type=${encodeURIComponent(`${checkBox.value}&${checkBox.value}=${search}&page= `)}`
+        };
+
+        if (dateCheckBox.checked == true) {
+            page.redirect(query.querystring(dateCheckBox));
+        } else if (regNumberCheckBox.checked == true) {
+            page.redirect(query.querystring(regNumberCheckBox));
+        }
     }
 }
 
